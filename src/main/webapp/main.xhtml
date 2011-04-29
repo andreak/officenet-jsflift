@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	>
+<f:view contentType="text/html" encoding="UTF-8">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+		<title>Test-page in JSF</title>
+		<script src="${facesContext.externalContext.requestContextPath}/classpath/jquery.js" type="text/javascript" />
+		<script type="text/javascript">
+			jQuery.noConflict();
+			jQuery(document).ready(function() {liftAjax.lift_successRegisterGC();});
+			var lift_page = "NO_PAGE";
+		</script>
+		<script src="${facesContext.externalContext.requestContextPath}/ajax_request/liftAjax.js" type="text/javascript" />
+		<h:outputScript name="prototype.js" library="js/external"/>
+		<style type="text/css">
+			.popup_container {
+				border: 1px solid red;
+			}
+		</style>
+		<script type="text/javascript">
+		//<![CDATA[
+
+			function getOrCreateElement(elementId) {
+				var el = $(elementId);
+				if (el) {
+					return el;
+				}
+				el = new Element('div', {id: elementId, style:{display: "none"}});
+				document.body.appendChild(el);
+				return $(el);
+			}
+
+		function openLiftPage() {
+			var popupContainer = getOrCreateElement("liftBox");
+			popupContainer.addClassName("popup_container");
+			var req = new Ajax.Updater(popupContainer,
+									   "/jsflift/lift/liftPage.html",
+									   {parameters: {}
+									   , evalScripts: true}
+				);
+			
+		}
+		//]]>
+
+		</script>
+	</h:head>
+	<h:body>
+		<h:commandButton
+				id="liftPageButton"
+				type="button"
+				onclick="openLiftPage();return false;"
+				value="Load Lift-page"/>
+	</h:body>
+</f:view>
+</html>
