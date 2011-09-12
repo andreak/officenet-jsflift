@@ -1,6 +1,3 @@
-/**
- * Copyright © SG Finans
- */
 package no.officenet.jsflift.controller
 
 import org.springframework.beans.factory.ObjectFactory
@@ -8,7 +5,6 @@ import org.springframework.beans.factory.config.Scope
 import javax.faces.context.FacesContext
 
 class ViewScope extends Scope {
-
 
 	def get(name: String, objectFactory: ObjectFactory[_]): AnyRef = {
 		val viewMap = FacesContext.getCurrentInstance.getViewRoot.getViewMap
